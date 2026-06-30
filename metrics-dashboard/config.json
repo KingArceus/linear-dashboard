@@ -1,0 +1,10 @@
+{
+  "defaults": {
+    "blockedStateName": "Blocked",
+    "innovationLabels": ["improvement", "innovation", "automation", "refactoring", "tooling"],
+    "pcvMode": "sub-issues",
+    "wipLimit": 10,
+    "workloadsDocumentTitle": "Workloads"
+  },
+  "teams": {}
+}

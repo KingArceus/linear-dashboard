@@ -42,34 +42,21 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
-
       - name: Use Node.js 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
-          cache: 'pnpm'
+          cache: 'npm'
+          cache-dependency-path: metrics-dashboard/package-lock.json
 
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Lint code
-        run: pnpm run lint 2>/dev/null || echo "No lint script configured"
+        run: npm ci
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Run tests
-        run: pnpm test
-
-      - name: Upload coverage reports (optional)
-        uses: codecov/codecov-action@75ecb36a0ebb6d740c44ff5e84541c2a8cf9d8f8 # v4.0.0
-        if: always()
-        with:
-          directory: ./metrics-dashboard/coverage
-          fail_ci_if_error: false
-          verbose: true
+        run: npm test
 
   publish-artifact:
     name: Publish Build Artifact
@@ -89,20 +76,18 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
-
       - name: Use Node.js 22
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
-          cache: 'pnpm'
+          cache: 'npm'
+          cache-dependency-path: metrics-dashboard/package-lock.json
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
